@@ -97,9 +97,18 @@ class ServerDensityAPI {
 		$url .= $this->module . "/" . $this->method;
 		$url .= "?account=" . self::SD_ACCOUNT_SUBDOMAIN . "." . self::SD_DOMAIN . "&apikey=" . self::SD_ACCOUNT_API_KEY;
 
-		// add any method parameters to the URL (if we're not POSTing content)
-		if(!empty($this->params) && $this->setRequestMethod()->requestMethod == 'GET')
+		if(!empty($this->params) && $this->setRequestMethod()->requestMethod == 'GET') {
+
+			// add any method parameters to the URL (if we're GETting content)
 			$url .= "&" . http_build_query($this->params, "\n");
+
+		} else {
+
+			// if we're including a deviceId we need it in the URL
+			if(!empty($this->params['deviceId']))
+				$url .= "&deviceId=" . $this->params['deviceId'];
+
+		}
 
 		$this->url = $url;
 
@@ -143,7 +152,11 @@ class ServerDensityAPI {
 		// if this method requires a POST build cURL differently
 		if($this->setRequestMethod()->requestMethod == 'POST') {
 			foreach($this->params as $key => $value)
-				$postedContent[$key] = urlencode($value);
+				// deviceId needs to be place in the URL, not POST data
+				if($key != 'deviceId') {
+					if($key != 'payload') $value = urlencode($value);
+					$postedContent[$key] = $value;
+				}
 			curl_setopt($handle, CURLOPT_POST, TRUE);
 			curl_setopt($handle, CURLOPT_POSTFIELDS, $postedContent);
 		}
