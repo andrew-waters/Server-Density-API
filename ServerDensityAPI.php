@@ -66,7 +66,7 @@ class ServerDensityAPI {
 	public function setCall($module, $method, $params = array()) {
 
 		$this->module = strtolower($module);
-		$this->method = strtolower($method);
+		$this->method = $method;
 		$this->params = $params;
 
 		if(!$this->verifyCall()) {
@@ -144,7 +144,7 @@ class ServerDensityAPI {
 
 		$handle = curl_init();
 		curl_setopt($handle, CURLOPT_URL, $this->url);
-		curl_setopt($handle, CURLOPT_USERAGENT, "Freedom/1.0");
+		curl_setopt($handle, CURLOPT_USERAGENT, "SD_PHP_API_AW/1.0");
 		curl_setopt($handle, CURLOPT_HEADER, 0);
 		curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($handle, CURLOPT_TIMEOUT, 10);
