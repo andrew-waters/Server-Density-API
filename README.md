@@ -7,13 +7,27 @@ Server Density is a monitoring suite for your servers. This class allows you to 
 
 ## How to use
 
-The API is object orientated and as such should be simple to use and familiar. Simply instatiate the class and start makeing your calls, such as:
+Fill in your login credentials and API details to the class:
+
+	const SD_ACCOUNT_SUBDOMAIN	= "example";
+	const SD_ACCOUNT_API_KEY	= "APIKEY";
+	const SD_ACCOUNT_USERNAME	= "username";
+	const SD_ACCOUNT_PASSWORD	= "password";
+
+The API is object orientated and as such should be simple to integrate.
+Simply instatiate the class and start making your calls.
+
+For example, the following will print a list of all your device groups:
 
 	$api = new ServerDensityAPI;
+	
 	$api->setCall("devices", "list")->call();
+	
 	if($api->response->status == 1) {
+	
 		// the call has been successful
 		print_r($api->response->data);
+	
 	}
 
 
