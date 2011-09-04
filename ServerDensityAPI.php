@@ -59,11 +59,12 @@ class ServerDensityAPI {
 	 *	@param	string	$module		The 'module' name
 	 *	@param	string	$method		The method to call on the module
 	 *	@param	array	$params		A keyed array of parameters to call with
+	 *	@param	BOOL	$makeCall	If TRUE, the call is made after it is constructed
 	 *
 	 *	@return $this
 	 *
 	 */
-	public function setCall($module, $method, $params = array()) {
+	public function setCall($module, $method, $params = array(), $makeCall = FALSE) {
 
 		$this->module = strtolower($module);
 		$this->method = $method;
@@ -79,6 +80,8 @@ class ServerDensityAPI {
 			throw new ServerDensityAPIException($message);
 
 		}
+
+		if($makeCall) return $this->call();
 
 		return $this;
 		
