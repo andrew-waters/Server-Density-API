@@ -22,7 +22,7 @@
  *
  *	@author 	Andrew Waters <andrew@band-x-media.co.uk>
  *	@copyright 	Andrew Waters 2011-08-30
- *	@version 	1.0
+ *	@version 	1.1
  *	@license	http://opensource.org/licenses/gpl-license.php GNU Public License
  *
  */
@@ -37,7 +37,7 @@ class ServerDensityAPI {
 
 	/* You probably don't want to be changing these */
 	const API_URL				= "api.serverdensity.com";
-	const API_VERSION			= "1.3";
+	const API_VERSION			= "1.4";
 	const SD_DOMAIN				= "serverdensity.com";
 
 
@@ -344,7 +344,7 @@ class ServerDensityAPI {
 					'request' => 'GET'
 				),
 				'rename' => array(
-					'request' => 'GET',
+					'request' => 'POST',
 					'params' => array(
 						'deviceId' => array(
 							'type' => 'string',
@@ -382,11 +382,11 @@ class ServerDensityAPI {
 							'type' => 'string',
 							'required' => TRUE
 						),
-						'metricGroup' => array(
+						'serviceId' => array(
 							'type' => 'string',
 							'required' => TRUE
 						),
-						'metricName' => array(
+						'metric' => array(
 							'type' => 'string',
 							'required' => TRUE
 						),
@@ -525,7 +525,7 @@ class ServerDensityAPI {
 					)
 				),
 				'delete' => array(
-					'request' => 'GET',
+					'request' => 'POST',
 					'params' => array(
 						'userId' => array(
 							'type' => 'string',
