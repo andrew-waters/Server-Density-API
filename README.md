@@ -10,7 +10,6 @@ Server Density is a monitoring suite for your servers. This class allows you to 
 Fill in your login credentials and API details to the class:
 
 	const SD_ACCOUNT_SUBDOMAIN	= "example";
-	const SD_ACCOUNT_API_KEY	= "APIKEY";
 	const SD_ACCOUNT_USERNAME	= "username";
 	const SD_ACCOUNT_PASSWORD	= "password";
 
@@ -28,12 +27,20 @@ For example, the following will print a list of all your device groups:
 		// the call has been successful
 		print_r($api->response->data);
 	
+	} else {
+
+		// the call was unsuccessful (not due to an exception)
+
 	}
 
 
 ## Requirements
 * PHP 5
 * cURL
+
+
+## Contributors
+[Andrew Waters](https://twitter.com/andrew_waters) and [Dominik Gehl](https://twitter.com/dominikgehl)
 
 
 ## License

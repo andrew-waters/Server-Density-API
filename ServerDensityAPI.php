@@ -22,7 +22,7 @@
  *
  *	@author 	Andrew Waters <andrew@band-x-media.co.uk>
  *	@copyright 	Andrew Waters 2011-08-30
- *	@version 	1.1
+ *	@version 	1.2
  *	@license	http://opensource.org/licenses/gpl-license.php GNU Public License
  *
  */
@@ -36,7 +36,7 @@ class ServerDensityAPI {
 
 	/* You probably don't want to be changing these */
 	const API_URL				= "api.serverdensity.com";
-	const API_VERSION			= "1.4";
+	const API_VERSION			= "1.4.3";
 	const SD_DOMAIN				= "serverdensity.com";
 
 
