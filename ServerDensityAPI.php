@@ -94,7 +94,7 @@ class ServerDensityAPI {
 	 */
 	public function buildURL() {
 	
-		$url  = "https://" . self::SD_ACCOUNT_USERNAME . ":" . self::SD_ACCOUNT_PASSWORD . "@";
+		$url  = "https://";
 		$url .= self::API_URL . "/" . self::API_VERSION . "/";
 		$url .= $this->module . "/" . $this->method;
 		$url .= "?account=" . self::SD_ACCOUNT_SUBDOMAIN . "." . self::SD_DOMAIN;
@@ -147,6 +147,8 @@ class ServerDensityAPI {
 		$handle = curl_init();
 		curl_setopt($handle, CURLOPT_URL, $this->url);
 		curl_setopt($handle, CURLOPT_USERAGENT, "SD_PHP_API_AW/1.0");
+		curl_setopt($handle, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+		curl_setopt($handle, CURLOPT_USERPWD, self::SD_ACCOUNT_USERNAME . ":" . self::SD_ACCOUNT_PASSWORD);
 		curl_setopt($handle, CURLOPT_HEADER, 0);
 		curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($handle, CURLOPT_TIMEOUT, 10);
