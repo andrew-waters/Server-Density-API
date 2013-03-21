@@ -31,7 +31,6 @@ class ServerDensityAPI {
 
 	/* Your deets here: */
 	const SD_ACCOUNT_SUBDOMAIN	= "";
-	const SD_ACCOUNT_API_KEY	= "";
 	const SD_ACCOUNT_USERNAME	= "";
 	const SD_ACCOUNT_PASSWORD	= "";
 
@@ -98,7 +97,7 @@ class ServerDensityAPI {
 		$url  = "https://" . self::SD_ACCOUNT_USERNAME . ":" . self::SD_ACCOUNT_PASSWORD . "@";
 		$url .= self::API_URL . "/" . self::API_VERSION . "/";
 		$url .= $this->module . "/" . $this->method;
-		$url .= "?account=" . self::SD_ACCOUNT_SUBDOMAIN . "." . self::SD_DOMAIN . "&apikey=" . self::SD_ACCOUNT_API_KEY;
+		$url .= "?account=" . self::SD_ACCOUNT_SUBDOMAIN . "." . self::SD_DOMAIN;
 
 		if(!empty($this->params) && $this->setRequestMethod()->requestMethod == 'GET') {
 
