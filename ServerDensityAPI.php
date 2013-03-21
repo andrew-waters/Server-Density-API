@@ -532,6 +532,9 @@ class ServerDensityAPI {
 						)
 					)
 				),
+				'list' => array(
+					'request' => 'GET'
+				),
 				'getById' => array(
 					'request' => 'GET',
 					'params' => array(
