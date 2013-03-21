@@ -153,11 +153,30 @@ class ServerDensityAPI {
 
 		// if this method requires a POST build cURL differently
 		if($this->setRequestMethod()->requestMethod == 'POST') {
+			$postedContent = '';
 			foreach($this->params as $key => $value)
 				// deviceId needs to be place in the URL, not POST data
 				if($key != 'deviceId') {
-					if($key != 'payload') $value = urlencode($value);
-					$postedContent[$key] = $value;
+					if ($postedContent != '') {
+						$postedContent .= '&';
+					}
+					if($key == 'payload') {
+						$postedContent .= "$key=$value";
+					}
+					else {
+						if (! is_array($value)) {
+							$value = urlencode($value);
+							$postedContent .= "$key=$value";
+						}
+						else {
+							for ($i=0; $i<count($value); $i++) {
+								if ($i>0) {
+									$postedContent .= '&';
+								}
+								$postedContent .= $key . '[]=' . urlencode($value[$i]);
+							}
+						}
+					}
 				}
 			curl_setopt($handle, CURLOPT_POST, TRUE);
 			curl_setopt($handle, CURLOPT_POSTFIELDS, $postedContent);
@@ -190,6 +209,51 @@ class ServerDensityAPI {
 
 		$validAPICalls = array(
 			'alerts' => array(
+				'add' => array(
+					'request' => 'POST',
+					'params' => array(
+						'userId' => array(
+							'type' => 'array',
+							'required' => TRUE
+						),
+						'serverId' => array(
+							'type' => 'int',
+							'required' => TRUE
+						),
+						'notificationType' => array(
+							'type' => 'array',
+							'required' => TRUE
+						),
+						'checkType' => array(
+							'type' => 'string',
+							'required' => TRUE
+						),
+						'comparison' => array(
+							'type' => 'string',
+							'required' => TRUE
+						),
+						'notificationFixed' => array(
+							'type' => 'int',
+							'required' => TRUE
+						),
+						'notificationDelayImmediately' => array(
+							'type' => 'int',
+							'required' => TRUE
+						),
+						'notificationFrequency' => array(
+							'type' => 'int',
+							'required' => TRUE
+						),
+						'triggerThreshold' => array(
+							'type' => 'int',
+							'required' => TRUE
+						),
+						'pluginKey' => array(
+							'type' => 'int',
+							'required' => FALSE
+						)
+					)
+				),
 				'getHistory' => array(
 					'request' => 'GET',
 					'params' => array(
@@ -592,8 +656,6 @@ class ServerDensityAPI {
 							case('array') :
 								if(!is_array($this->params[$key])) {
 									$this->log['errors'][] = "You need to supply an array for '$key'";
-								} else {
-									$this->params[$key] = json_encode($this->params[$key]);
 								}
 								break;
 
