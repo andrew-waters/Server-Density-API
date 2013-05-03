@@ -232,7 +232,7 @@ class ServerDensityAPI {
 						),
 						'comparison' => array(
 							'type' => 'string',
-							'required' => TRUE
+							'required' => FALSE
 						),
 						'notificationFixed' => array(
 							'type' => 'int',
@@ -248,11 +248,32 @@ class ServerDensityAPI {
 						),
 						'triggerThreshold' => array(
 							'type' => 'int',
-							'required' => TRUE
+							'required' => FALSE
+						),
+						'triggerThresholdMin' => array(
+							'type' => 'int',
+							'required' => FALSE
+						),
+						'diskUsageMountPoint' => array(
+							'type' => 'string',
+							'required' => FALSE
+						),
+						'processName' => array(
+							'type' => 'string',
+							'required' => FALSE
 						),
 						'pluginKey' => array(
 							'type' => 'int',
 							'required' => FALSE
+						)
+					)
+				),
+				'delete' => array(
+					'request' => 'POST',
+					'params' => array(
+						'alertId' => array(
+							'type' => 'string',
+							'required' => TRUE
 						)
 					)
 				),
