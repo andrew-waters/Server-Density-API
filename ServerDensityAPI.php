@@ -36,7 +36,7 @@ class ServerDensityAPI {
 
 	/* You probably don't want to be changing these */
 	const API_URL				= "api.serverdensity.com";
-	const API_VERSION			= "1.4.3";
+	const API_VERSION			= "1.4";
 	const SD_DOMAIN				= "serverdensity.com";
 
 
